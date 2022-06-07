@@ -98,9 +98,9 @@ with open('yards.csv','w',newline='') as new_file:
         prices_url = soup.find_all("a", class_='Product-link')[2]['href']
 
         # go to inv url and find yard info
-        page2 = requests.get(inv_url)
-        soup2 = BeautifulSoup(page2.content, "html.parser")
-        main_div = soup2.find("div", class_="content-container content-container--location-feature")
+        page = requests.get(inv_url)
+        soup = BeautifulSoup(page.content, "html.parser")
+        main_div = soup.find("div", class_="content-container content-container--location-feature")
         yard_name = main_div.findChild()['data-location-name']
         yard_address = main_div.findChild()['data-location-address']
         yard_city = main_div.findChild()['data-location-city']
@@ -121,6 +121,6 @@ with open('yards.csv','w',newline='') as new_file:
             print(yard_code) """
             
         yard_info = [yard_name, yard_address, yard_city, yard_zipcode, yard_phone, yard_lat, yard_long, yard_code,inv_url,prices_url]
-        #print(f"Current Yard: {yard_name}")
+        print(f"Current Yard: {yard_name}")
         csv_writer.writerow(yard_info)
 
